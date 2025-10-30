@@ -18,7 +18,7 @@ class BukuController
      * Show the form for creating a new resource.
      */
     public function create(){
-		return view('admin.buku.create');
+		return view('admin.create');
     }
     /**
      * Store a newly created resource in storage.
