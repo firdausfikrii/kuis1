@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Buku;
 
 class BukuController
 {
@@ -11,21 +12,31 @@ class BukuController
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $data['dataBuku'] = Buku::all();
+		return view('admin.buku.index',$data);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create(){
-		return view('admin.create');
+		return view('admin.buku.create');
     }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        $data['judul'] = $request->judul;
+		$data['penulis'] = $request->penulis;
+		$data['penerbit'] = $request->penerbit;
+		$data['tahun_terbit'] = $request->tahun_terbit;
+		$data['jumlah'] = $request->jumlah;
+
+		Buku::create($data);
+
+		return redirect()->route('buku.index')->with('success','Penambahan Data Berhasil!');
     }
 
     /**
